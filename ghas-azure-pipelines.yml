@@ -1,0 +1,30 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: AdvancedSecurity-Codeql-Init@1
+    inputs:
+      languages: "java"
+
+  - task: Maven@4
+    inputs:
+      mavenPomFile: 'pom.xml'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.17'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: false
+
+  - task: AdvancedSecurity-Codeql-Analyze@1
+
+  - task: AdvancedSecurity-Dependency-Scanning@1
+
+  # You can also run 3rd party tools and import the findings into GHAzDO
+  - task: TrivySarif@1
+  - task: AdvancedSecurity-Publish@1
