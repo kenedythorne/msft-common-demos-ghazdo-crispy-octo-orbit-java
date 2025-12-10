@@ -1,0 +1,26 @@
+name: "Run custom queries"
+
+#disable-default-quertes: true
+
+#packs:
+#   ## All queries fron the Codedl Bully in packs (including low/na precision quertes)
+
+queries:
+  - name: Use security-and-quality query suite 
+    uses: security-extended
+  - name: My local query
+    uses: ./customQueries/java/CallsToStringToString.ql
+
+#paths-ignore:
+#  - node_modules
+#  - frontend-admin/dist
+
+query-filters:
+# - include:
+#    kind: problem
+# - include:
+#     precision: medium
+ - exclude:
+    id:
+      - java/unsafe-deserialization
+      - java/sql-injection
