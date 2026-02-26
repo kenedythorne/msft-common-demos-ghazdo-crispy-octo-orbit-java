@@ -33,6 +33,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -54,18 +55,25 @@ public class Welcome {
    */
   @GetMapping(path = {"welcome.mvc"})
   public ModelAndView welcome(HttpServletRequest request) {
-
-    // set the welcome attribute
-    // this is so the attack servlet does not also
-    // send them to the welcome page
     HttpSession session = request.getSession();
     if (session.getAttribute(WELCOMED) == null) {
-      session.setAttribute(WELCOMED, "true");
+      // First visit: show the welcome screen
+      return new ModelAndView("welcome");
     }
+    // Already welcomed: go straight to the main application
+    return new ModelAndView("forward:/attack?start=true");
+  }
 
-    // go ahead and send them to webgoat (skip the welcome page)
-    ModelAndView model = new ModelAndView();
-    model.setViewName("forward:/attack?start=true");
-    return model;
+  /**
+   * Handles the user proceeding from (or skipping) the welcome screen.
+   *
+   * @param request a {@link jakarta.servlet.http.HttpServletRequest} object.
+   * @return a {@link org.springframework.web.servlet.ModelAndView} object.
+   */
+  @PostMapping(path = {"welcome.mvc"})
+  public ModelAndView proceed(HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    session.setAttribute(WELCOMED, "true");
+    return new ModelAndView("redirect:/attack?start=true");
   }
 }

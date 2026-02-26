@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to WebGoat</title>
+    <link rel="shortcut icon" th:href="@{/css/img/favicon.ico}" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
+    <style>
+        .welcome-container {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .welcome-logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .welcome-logo span {
+            color: #e8000d;
+        }
+        .welcome-container h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .welcome-container p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        .welcome-container ul {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        .welcome-actions {
+            margin-top: 30px;
+        }
+        .btn-start {
+            padding: 10px 30px;
+            font-size: 1.1em;
+        }
+        .btn-skip {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<section id="container">
+    <header id="header">
+        <div class="brand">
+            <a th:href="@{/welcome.mvc}" class="logo"><span>Web</span>Goat</a>
+        </div>
+    </header>
+    <section class="main-content-wrapper">
+        <section id="main-content">
+            <div class="welcome-container animated fadeIn">
+                <div class="welcome-logo"><span>Web</span>Goat</div>
+                <h2>Welcome to WebGoat!</h2>
+                <p>
+                    WebGoat is a deliberately insecure web application maintained by
+                    <a href="https://owasp.org" target="_blank" rel="noopener noreferrer">OWASP</a> that allows you to test
+                    vulnerabilities commonly found in Java-based applications that use common and
+                    popular open-source components.
+                </p>
+                <p>
+                    This application is designed to provide you with hands-on experience with
+                    techniques aimed at demonstrating and testing application security vulnerabilities.
+                    <strong>Please note: this application is intentionally vulnerable. Do not deploy it
+                    on a public server.</strong>
+                </p>
+                <h4>Getting Started</h4>
+                <ul>
+                    <li>Select a lesson from the left-hand menu to begin.</li>
+                    <li>Each lesson contains hints to guide you through the exercises.</li>
+                    <li>Use the Report Card button to track your progress.</li>
+                    <li>Check out the
+                        <a href="https://github.com/WebGoat/WebGoat/wiki" target="_blank" rel="noopener noreferrer">WebGoat Wiki</a>
+                        for additional help and documentation.
+                    </li>
+                </ul>
+                <div class="welcome-actions">
+                    <form th:action="@{/welcome.mvc}" method="post">
+                        <button type="submit" class="btn btn-primary btn-start">
+                            <i class="fa fa-play"></i> Get Started
+                        </button>
+                        <button type="submit" class="btn btn-default btn-skip" style="margin-left: 10px;">
+                            Skip
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+</body>
+</html>
